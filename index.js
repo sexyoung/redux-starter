@@ -5,10 +5,10 @@ import {increment} from './actions/coutner.js';
 console.log(store.getState());
 
 // 透過 dispatch() 發送我們剛剛所定義的 action
-store.dispatch(increment());
+store.dispatch(increment(2));
 
 // 看執行後的 state
 console.log(store.getState());
 
-store.dispatch(increment());
+store.dispatch(increment(3));
 console.log(store.getState());
