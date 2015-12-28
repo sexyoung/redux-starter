@@ -1,9 +1,13 @@
 import {createStore} from "redux";
 
-// const
+// 定義 constant (常數)
 const INCREMENT = 'INCREMENT';
 
-// reducer
+/**
+ * 定義 reducer
+ * 它好像是 store 的一部分,
+ * 只有 reducer 會改變整個 store 的內容
+ */
 function counter(state=0, action) {
   switch (action.type) {
   case 'INCREMENT':
@@ -13,6 +17,7 @@ function counter(state=0, action) {
   }
 }
 
+// 把 reducer 做成 store (未來也可能會有多個 reducer)
 let store = createStore(counter);
 
 // 透過 getState() 取得目前的 state

@@ -9,11 +9,13 @@
   "author": "sexyoung",
   "license": "ISC",
   "dependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.2"
   },
   "devDependencies": {
-    "babel-core": "^6.3.26",
+    "babel-core": "^5.6.18",
     "babel-loader": "^5.1.4",
     "babel-plugin-react-transform": "^2.0.0",
     "express": "^4.13.3",
