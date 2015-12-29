@@ -12,35 +12,28 @@ const initialState = {
   todos: []
 }
 
-function todos(state, action){
+function todos(state = [], action){
   switch(action.type){
     case ADD_TODO:
-      return Object.assign({}, state, {
-        /**
-         * 這個寫法加進去好特別 O_O
-         */
-        todos: [
-          ...state.todos,
+      return [
+          ...state,
           {
             text: action.text,
             completed: false
           }
-        ]
-      });
+        ];
 
     /**
      * 這種寫法好屌 @_@
      */
     case COMPLETE_TODO:
-      return Object.assign({}, state, {
-        todos: [
-          ...state.todos.slice(0, action.index),
-          Object.assign({}, state.todos[action.index], {
+      return [
+          ...state.slice(0, action.index),
+          Object.assign({}, state[action.index], {
             completed: true
           }),
-          ...state.todos.slice(action.index + 1)
-        ]
-      });
+          ...state.slice(action.index + 1)
+        ];
     default:
       return state;
   }
@@ -71,7 +64,7 @@ export default function todoApp(state = initialState, action) {
     case ADD_TODO:
     case COMPLETE_TODO:
       return Object.assign({}, state, {
-        todos: todos(state.todos, action);
+        todos: todos(state.todos, action)
       })
 
     default:
