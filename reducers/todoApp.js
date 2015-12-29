@@ -5,14 +5,6 @@ import {
   VisibilityFilters} from "../actions/todo";
 
 /**
- * 初始化狀態
- */
-const initialState = {
-  visibilityFilter: VisibilityFilters.SHOW_ALL,
-  todos: []
-}
-
-/**
  * 專門在處理 todos 的 reducer
  */
 function todos(state = [], action){
@@ -26,9 +18,6 @@ function todos(state = [], action){
           }
         ];
 
-    /**
-     * 這種寫法好屌 @_@
-     */
     case COMPLETE_TODO:
       return [
           ...state.slice(0, action.index),
@@ -55,34 +44,13 @@ function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action){
 }
 
 /**
- * 定義 reducer
- * 它好像是 store 的一部分,
- * 只有 reducer 會改變整個 store 的內容
- * 另外 default 的意思就是專指回傳這個
- * 有人 import a from "./counter.js"
- * a 指的就是 counter()
- *
- * 但如果沒有寫 default
- * 那就要寫 import {counter} from "./counter.js"
+ * 它也不再需要知道完整的初始 state 了。
+ * 子 reducers 們在它們一開始被給予 
+ * `undefined 的時候只要回傳它們的初始 state 就足夠了。
  */
-export default function todoApp(state = initialState, action) {
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      /**
-       * Object.assign() 是 ES6 的一部分
-       * 不過大部份瀏覽器尚未實作。
-       * 你會需要使用一個 polyfill
-       */
-      return Object.assign({}, state, {
-        visibilityFilter: action.filter
-      });
-    case ADD_TODO:
-    case COMPLETE_TODO:
-      return Object.assign({}, state, {
-        todos: todos(state.todos, action)
-      })
-
-    default:
-      return state;
+export default function todoApp(state = {}, action) {
+  return {
+    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+    todos: todos(state.todos, action)
   }
 }
