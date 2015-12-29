@@ -1,3 +1,5 @@
+import {combineReducers} from "redux";
+
 import {
   ADD_TODO,
   COMPLETE_TODO,
@@ -44,13 +46,17 @@ function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action){
 }
 
 /**
- * 它也不再需要知道完整的初始 state 了。
- * 子 reducers 們在它們一開始被給予 
- * `undefined 的時候只要回傳它們的初始 state 就足夠了。
+ * 請注意這完全等同於：
+ * export default function todoApp(state = {}, action) {
+ *  return {
+ *    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
+ *    todos: todos(state.todos, action)
+ *  }
+ *}
  */
-export default function todoApp(state = {}, action) {
-  return {
-    visibilityFilter: visibilityFilter(state.visibilityFilter, action),
-    todos: todos(state.todos, action)
-  }
-}
+const todoApp = combineReducers({
+  visibilityFilter,
+  todos
+});
+
+export default todoApp;
