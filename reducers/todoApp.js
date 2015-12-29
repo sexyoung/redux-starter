@@ -12,6 +12,9 @@ const initialState = {
   todos: []
 }
 
+/**
+ * 專門在處理 todos 的 reducer
+ */
 function todos(state = [], action){
   switch(action.type){
     case ADD_TODO:
@@ -34,6 +37,18 @@ function todos(state = [], action){
           }),
           ...state.slice(action.index + 1)
         ];
+    default:
+      return state;
+  }
+}
+
+/**
+ * visibilityFilter
+ */
+function visibilityFilter(state = VisibilityFilters.SHOW_ALL, action){
+  switch (action.type) {
+    case SET_VISIBILITY_FILTER:
+      return action.filter
     default:
       return state;
   }
