@@ -1,4 +1,12 @@
+/**
+ * libs
+ */
+import React from "react";
+import {render} from "react-dom";
+import {Provider} from "react-redux";
+
 import store from "./store/todoStore";
+import App from "./containers/App";
 
 // 取得 action function
 import {addTodo, setVisibilityFilter, completeTodo} from './actions/todo';
@@ -25,3 +33,8 @@ store.dispatch(completeTodo(1));
 
 unsubscribe();
 store.dispatch(completeTodo(0));
+
+render(
+  <App />,
+  document.getElementById("root")
+);
