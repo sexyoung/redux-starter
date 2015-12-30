@@ -31,10 +31,10 @@ store.dispatch(setVisibilityFilter('SHOW_COMPLETED'));
 // 完成 index 1
 store.dispatch(completeTodo(1));
 
-unsubscribe();
-store.dispatch(completeTodo(0));
 
 render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById("root")
 );
