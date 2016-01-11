@@ -2,6 +2,9 @@ import {
   ADD_TODO,
   COMPLETE_TODO} from "../actions/todo";
 
+
+import todo from "./todo";
+
 /**
  * 專門在處理 todos 的 reducer
  */
@@ -10,20 +13,12 @@ export default function todos(state = [], action){
     case ADD_TODO:
       return [
           ...state,
-          {
-            text: action.text,
-            completed: false
-          }
+          todo(undefined, action)
         ];
 
     case COMPLETE_TODO:
-      return [
-          ...state.slice(0, action.index),
-          Object.assign({}, state[action.index], {
-            completed: true
-          }),
-          ...state.slice(action.index + 1)
-        ];
+      return state.map(t => 
+        todo(t, action));
     default:
       return state;
   }

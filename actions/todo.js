@@ -12,10 +12,17 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
+/*
+ * action creators
+ */
+let nextTodoId = 0;
+
+
 export function addTodo(text = "default Value") {
   return {
     type: ADD_TODO,
-    text
+    id: nextTodoId++, //可以用 hash的方式指定別名
+    text  // 如果沒指定就直接是變數名
   }
 }
 
